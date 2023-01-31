@@ -14,14 +14,28 @@ library(dsbox)
 
 ```{r load-data, message = FALSE}
 states <- read_csv("data/states.csv")
+dennys <- dennys
+laquinta <- laquinta
 ```
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+There are 
+
+```{r denny's-dimensions}
+
+#number of rows n columns
+
+nrow(dennys)
+ncol(dennys)
+
+#glimpse of rows n columns
+
+glimpse(dennys)
+summary(dennys)
+
+```
+
 
 ### Exercise 2
 
