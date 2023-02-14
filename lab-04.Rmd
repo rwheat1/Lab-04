@@ -95,6 +95,8 @@ There are La Quinta locations outside of America in Canada, China, Mexico, New Z
 
 ### Exercise 8
 
+
+
 ```{r laquinta-country}
 
 #Creating new variable "Country" for La Quinta locations. Note that the countries do not match what is on the La Quinta website (where I got the previous info...)
@@ -117,6 +119,11 @@ laquinta <- laquinta %>%
 
 ### Exercise 9
 
+California has 403 Dennys restaurants (the most) and Delaware has 1 Dennys restaurant (the least). This tracks for me.
+
+La Quinta has 237 Texas locations (the most) and Maine has 1 location (the least). It's interesting that California doesn't have anywhere close to the number of La Quintas as Texas.
+
+
 ```{r locations-by-state}
 
 dennys %>%
@@ -129,6 +136,63 @@ laquinta %>%
 
 ```
 
+### Exercise 10
 
-Add exercise headings as needed.
+Seems like Dennys are concentrated in the Northeast and California, while La Quintas are concentrated in the South/Southeast.
+
+```{r dennys-per-thousand-miles}
+
+#create new variable for hotel vs. restaurant
+
+dennys <- dennys %>%
+  mutate(establishment = "Denny's")
+laquinta <- laquinta %>%
+  mutate(establishment = "La Quinta")
+
+#merge into new dataset?
+
+dn_lq <- bind_rows(dennys, laquinta)
+
+#plot locations
+
+ggplot(dn_lq, mapping = aes(x = longitude,
+                            y = latitude,
+                            color = establishment)) +
+  geom_point(alpha = .4)
+
+```
+
+### Exercise 11
+
+It does seem like La Quintas tend to be next to Dennys, but Dennys don't necessarily tend to be next to La Quintas. 
+
+```{r north-carolina-things}
+
+#filter for locations in NC
+
+northc <- dn_lq %>%
+  filter(state == "NC")
+
+ggplot(northc, mapping = aes(x = longitude,
+                            y = latitude,
+                            color = establishment)) +
+  geom_point(alpha = .4)
+
+```
+
+### Exercise 12
+
+This time, it seems like the reverse: Dennys are around La Quintas, but La Quintas aren't always around Dennys.
+
+```{r texas-things}
+
+tx <- dn_lq %>%
+  filter(state == "TX")
+
+ggplot(tx, mapping = aes(x = longitude,
+                            y = latitude,
+                            color = establishment)) +
+  geom_point(alpha = .4)
+
+```
 
