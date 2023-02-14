@@ -20,7 +20,7 @@ laquinta <- laquinta
 
 ### Exercise 1
 
-There are 
+There are 1,643 rows, each representing one Denny's location. There are 6 columns, each representing one piece of info about each respective location: address, city, state, zip, longitude, lattitude.
 
 ```{r denny's-dimensions}
 
@@ -39,27 +39,96 @@ summary(dennys)
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 2 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+There are 909 rows, each representing one La Quinta hotel location. There are, again, 6 columns, each of which represent one variable for each location: address, city, state, zip, longitude, lattitude. This is the same dataframe structure as the Denny's dataset.
+
+```{r laquinta-dimensions}
+
+#number of rows n columns
+
+nrow(laquinta)
+ncol(laquinta)
+
+#what are the variables
+
+glimpse(laquinta)
+summarise(laquinta)
+
+```
+
 
 ### Exercise 3
 
-...
+There are no Denny's locations outside the U.S.A. There are 2,295 La Quinta locations in other countries. They are in the following places: Africa, Asia, Australia/Pacific Rim, Carribean, Central America, Europe, Middle East, South America.
 
 ### Exercise 4
 
-...
+You could tell whether locations in the La Quinta dataframe are outside the U.S. by filtering based on the state column.
 
 ### Exercise 5
 
-...
+There are no Dennys locations outside of the U.S.A.! Woo!
+
+```{r dennys-outside?}
+
+#filtering out Denny's locations that are outside the U.S.
+
+dennys %>%
+  filter(!(state %in% states$abbreviation))
+
+```
 
 ### Exercise 6
 
 ...
+```{r dennys-country}
 
- 
+#creating new variable "Country" for Dennys locations
+
+dennys <- dennys %>%
+  mutate(country = "United States")
+```
+
+### Exercise 7
+
+There are La Quinta locations outside of America in Canada, China, Mexico, New Zealand, Turkey, UAE, Chile, & Colombia.
+
+
+### Exercise 8
+
+```{r laquinta-country}
+
+#Creating new variable "Country" for La Quinta locations. Note that the countries do not match what is on the La Quinta website (where I got the previous info...)
+
+laquinta <- laquinta %>%
+  mutate(country = case_when(
+    state %in% states$abbreviation ~ "United States",
+    state %in% c("ON", "BC") ~ "Canada",
+    state == "ANT"           ~ "Colombia",
+    state %in% c("QR", "AG", "CH", "NL", "VE", "PU", "SL") ~ "Mexico",
+    state ==  "FM" ~ "Honduras"))
+
+#filtering La Quinta locations for only those in U.S.A.
+
+laquinta <- laquinta %>%
+  filter(country == "United States")
+
+```
+
+
+### Exercise 9
+
+```{r locations-by-state}
+
+dennys %>%
+  count(state) %>%
+  inner_join(states, by = c("state" = "abbreviation"))
+
+laquinta %>%
+  count(state) %>%
+  inner_join(states, by = c("state" = "abbreviation"))
+
+```
+
+
 Add exercise headings as needed.
 
