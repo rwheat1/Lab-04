@@ -1,7 +1,7 @@
 ---
-title: "Lab 04 - La Quinta is Spanish for next to Denny's, Pt. 1"
+title: "Lab 04 - La Quinta is Spanish for next to Dennys, Pt. 1"
 author: "Ryan Wheat"
-date: "Insert date here"
+date: "2/14"
 output: github_document
 ---
 
@@ -22,7 +22,7 @@ laquinta <- laquinta
 
 There are 1,643 rows, each representing one Denny's location. There are 6 columns, each representing one piece of info about each respective location: address, city, state, zip, longitude, lattitude.
 
-```{r denny's-dimensions}
+```{r dennys-dimensions}
 
 #number of rows n columns
 
